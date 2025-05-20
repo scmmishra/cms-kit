@@ -1,6 +1,7 @@
 import { z } from 'zod/v4'
 import { defineConfig } from '~/core/defineConfig'
 import { defineCollection } from '~/core/defineCollection'
+import { definePage } from '~/core/definePage'
 import { seoFields } from '~/core/fields/seo'
 
 export interface GlobalMeta {
@@ -13,7 +14,7 @@ export interface GlobalMeta {
   relation?: string
 }
 
-export const authorCollection = defineCollection({
+const authorCollection = defineCollection({
   title: 'Authors',
   description: 'Authors on the website',
   fields: {
@@ -33,7 +34,7 @@ export const authorCollection = defineCollection({
   },
 })
 
-export const blogCollection = defineCollection({
+const blogCollection = defineCollection({
   title: 'Blog',
   description: 'A collection for blog posts',
   fields: {
@@ -80,7 +81,23 @@ export const blogCollection = defineCollection({
   },
 })
 
-export const homepage = {
+const pricingFaqsCollection = defineCollection({
+  title: 'Pricing FAQs',
+  fields: {
+    question: z.string(),
+    answer: z.string().min(100).meta({
+      description: 'The answer to the pricing FAQ',
+      fieldtype: 'markdown',
+    }),
+  },
+  layout: {
+    list: [
+      'question',
+    ],
+  },
+})
+
+const homepage = definePage({
   title: 'Homepage',
   fields: {
     hero_title: z.string(),
@@ -90,15 +107,58 @@ export const homepage = {
       description: z.string(),
       icon: z.string().meta({ fieldType: 'code', language: 'svg' }),
     })),
+    ...seoFields,
   },
-}
+  layout: {
+    sidebar: [
+      ...Object.keys(seoFields) as (keyof typeof seoFields)[],
+    ],
+  },
+})
+
+const pricing = definePage({
+  title: 'Pricing',
+  fields: {
+    title: z.string(),
+    description: z.string(),
+    features: z.array(z.object({
+      title: z.string(),
+      description: z.string(),
+      icon: z.string().meta({ fieldType: 'code', language: 'svg' }),
+    })),
+    ...seoFields,
+  },
+  layout: {
+    sidebar: [
+      ...Object.keys(seoFields) as (keyof typeof seoFields)[],
+    ],
+  },
+})
+
+const about = definePage({
+  title: 'About',
+  fields: {
+    title: z.string(),
+    body: z.string().meta({ fieldType: 'markdown' }),
+    ...seoFields,
+  },
+  layout: {
+    sidebar: [
+      ...Object.keys(seoFields) as (keyof typeof seoFields)[],
+    ],
+  },
+})
 
 export default defineConfig({
   appName: 'CMS Kit',
   collections: {
-    blog: blogCollection,
+    authors: authorCollection,
+    blogs: blogCollection,
+    pricingFaqs: pricingFaqsCollection,
   },
   pages: {
     homepage,
+    pricing,
+    about,
   },
 })
