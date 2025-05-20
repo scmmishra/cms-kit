@@ -1,20 +1,54 @@
 <script setup lang="ts">
+const { appName } = useCMSKitConfig()
+
 useHead({
-  title: "Login - CMSKit"
+  title: 'Login - ' + appName,
+})
+
+const state = reactive({
+  email: '',
+  password: '',
 })
 </script>
 
 <template>
- <section class="pt-20 font-mono">
-  <div class="max-w-md mx-auto p-6 bg-white shadow outline-1 outline-gray-300">
-    <h1 class="text-2xl font-bold">Login</h1>
-    <UForm>
-      <label for="email">Email</label>
-      <input id="email" type="email" name="email" required>
-      <label for="password">Password</label>
-      <input id="password" type="password" name="password" required>
-      <button type="submit">Login</button>
-    </UForm>
-  </div>
- </section>
+  <section class="pt-20">
+    <UCard class="max-w-md mx-auto">
+      <h1 class="text-2xl font-bold">
+        Login to {{ appName }}
+      </h1>
+      <UForm
+        :state
+        class="mt-5 space-y-4"
+      >
+        <UFormField
+          label="Email"
+          name="email"
+        >
+          <UInput
+            v-model="state.email"
+            class="w-full"
+          />
+        </UFormField>
+
+        <UFormField
+          label="Password"
+          name="password"
+        >
+          <UInput
+            v-model="state.password"
+            class="w-full"
+            type="password"
+          />
+        </UFormField>
+
+        <UButton
+          type="submit"
+          block
+        >
+          Submit
+        </UButton>
+      </UForm>
+    </UCard>
+  </section>
 </template>

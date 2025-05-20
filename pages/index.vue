@@ -1,9 +1,10 @@
 <script setup lang="ts">
+const { appName } = useCMSKitConfig()
 useHead({
-  title: "Login - CMSKit"
+  title: 'Login - ' + appName,
 })
 </script>
 
 <template>
- <div>Hey there</div>
+  <div>Hey there</div>
 </template>
