@@ -1,58 +1,18 @@
+import { defineCollection } from '~/core/defineCollection'
+import { seoFields } from '~/core/fields/seo'
 import { z } from 'zod/v4'
 
 export interface GlobalMeta {
   title?: string
   description?: string
   placeholder?: string
-  fieldtype?: 'markdown' | 'textarea' | 'image'
+  fieldtype?: 'markdown' | 'textarea' | 'image' | 'code'
+  language?: string
   unqiue?: boolean
   relation?: string
 }
 
-export const seoFields = {
-  metaTitle: z
-    .string()
-    .min(10, 'Meta title must be at least 10 characters')
-    .max(80, 'Meta title should not exceed 80 characters')
-    .optional()
-    .meta({
-      title: 'Meta Title',
-      description: 'SEO title for search engines (usually 50-60 characters).',
-    }),
-  metaDescription: z
-    .string()
-    .min(20, 'Meta description must be at least 20 characters')
-    .max(200, 'Meta description should not exceed 200 characters')
-    .optional()
-    .meta({
-      title: 'Meta Description',
-      description:
-        'SEO description for search engines (usually 150-160 characters).',
-    }),
-  metaKeywords: z.string().optional().meta({
-    title: 'Meta Keywords',
-    description: 'Comma-separated keywords (less important for modern SEO)',
-  }),
-  canonicalUrl: z.string().url('Must be a valid URL').optional().meta({
-    title: 'Canonical URL',
-    description: 'Preferred URL version of this content',
-  }),
-  ogImage: z.string().url('Must be a valid URL').optional().meta({
-    title: 'Open Graph Image',
-    description: 'Social media preview image. Recommended 1200x630px.',
-    fieldtype: 'image',
-  }),
-  noIndex: z.boolean().default(false).meta({
-    title: 'No Index',
-    description: 'Prevent search engines from indexing this page',
-  }),
-  noFollow: z.boolean().default(false).meta({
-    title: 'No Follow',
-    description: 'Prevent search engines from following links on this page',
-  }),
-}
-
-export const authorCollection = {
+export const authorCollection = defineCollection({
   title: "Authors",
   description: "Authors on the website",
   fields: {
@@ -70,10 +30,10 @@ export const authorCollection = {
   layout: {
     list: ['fullName']
   }
-}
+})
 
 
-export const blogCollection = {
+export const blogCollection = defineCollection({
   title: "Blog",
   description: "A collection for blog posts",
   fields: {
@@ -111,17 +71,33 @@ export const blogCollection = {
     ],
     sidebar: [
       'slug',
-      'author',
+      'authors',
       'excerpt',
       'publishedAt',
       'featuredImage',
-      ...Object.keys(seoFields)
+      ...Object.keys(seoFields)as (keyof typeof seoFields)[],
     ]
+  }
+})
+
+export const homepage = {
+  title: "Homepage",
+  fields: {
+    hero_title: z.string(),
+    hero_subtitle: z.string(),
+    features: z.array(z.object({
+      title: z.string(),
+      description: z.string(),
+      icon: z.string().meta({ fieldType: 'code', language: 'svg' })
+    }))
   }
 }
 
 export default {
   collections: {
     blog: blogCollection
+  },
+  pages: {
+    homepage
   }
 }
