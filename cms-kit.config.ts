@@ -83,6 +83,7 @@ const blogCollection = defineCollection({
 
 const pricingFaqsCollection = defineCollection({
   title: 'Pricing FAQs',
+  description: 'FAQs to be listed in the pricing page',
   fields: {
     question: z.string(),
     answer: z.string().min(100).meta({

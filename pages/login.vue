@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useCMSKitConfig } from '~/composables/useCMSKitConfig'
+
 const { appName } = useCMSKitConfig()
 
 definePageMeta({
