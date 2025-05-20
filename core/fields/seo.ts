@@ -1,4 +1,4 @@
-import { z } from 'zod/v4';
+import { z } from 'zod/v4'
 
 export const seoFields = {
   metaTitle: z
@@ -43,4 +43,4 @@ export const seoFields = {
   }),
 }
 
-export type SeoFields = z.ZodObject<typeof seoFields>;
+export type SeoFields = z.ZodObject<typeof seoFields>
