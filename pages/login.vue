@@ -13,8 +13,8 @@ const state = reactive({
 
 <template>
   <section class="pt-20">
-    <UCard class="max-w-md mx-auto">
-      <h1 class="text-2xl font-bold">
+    <UCard class="max-w-md mx-auto shadow-lg">
+      <h1 class="text-2xl font-bold font-mono">
         Login to {{ appName }}
       </h1>
       <UForm
