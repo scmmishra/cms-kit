@@ -1,14 +1,13 @@
 <script setup lang="ts">
-const { appName } = useCMSKitConfig()
 useHead({
-  title: 'Login - ' + appName,
+  bodyAttrs: {
+    class: 'bg-gray-50',
+  },
 })
 </script>
 
 <template>
-  <aside>
-
-  </aside>
   <main>
+    <slot />
   </main>
 </template>

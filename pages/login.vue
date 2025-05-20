@@ -1,6 +1,10 @@
 <script setup lang="ts">
 const { appName } = useCMSKitConfig()
 
+definePageMeta({
+  layout: 'no-auth',
+})
+
 useHead({
   title: 'Login - ' + appName,
 })
