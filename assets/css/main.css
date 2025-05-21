@@ -2,7 +2,7 @@
 @import "@nuxt/ui";
 
 :root {
-  --ui-radius: 0.02em;
+  --ui-radius: 0.2em;
   --font-mono: "Geist Mono", monospace;
   --ui-container: 64rem;
 }
