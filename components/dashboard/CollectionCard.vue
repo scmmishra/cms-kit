@@ -14,7 +14,8 @@ defineProps<CardProps>()
 </script>
 
 <template>
-  <div
+  <NuxtLink
+    :to="`/collection/${cmsKey}`"
     class="outline outline-gray-300 p-4 pt-3 shadow"
   >
     <h3 class="text-lg font-semibold text-black">
@@ -23,5 +24,5 @@ defineProps<CardProps>()
     <p class="text-sm text-gray-500">
       {{ description }}
     </p>
-  </div>
+  </nuxtlink>
 </template>

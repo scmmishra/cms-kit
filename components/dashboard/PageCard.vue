@@ -14,14 +14,18 @@ defineProps<CardProps>()
 </script>
 
 <template>
-  <div
+  <NuxtLink
+    :to="`/page/${cmsKey}`"
     class="outline outline-gray-300 p-4 pt-3 shadow"
   >
     <h3 class="text-lg font-semibold text-black">
       {{ title }}
     </h3>
-    <p v-if="description" class="text-sm text-gray-500">
+    <p
+      v-if="description"
+      class="text-sm text-gray-500"
+    >
       {{ description }}
     </p>
-  </div>
+  </NuxtLink>
 </template>
