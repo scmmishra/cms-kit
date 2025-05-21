@@ -101,8 +101,8 @@ const pricingFaqsCollection = defineCollection({
 const homepage = definePage({
   title: 'Homepage',
   fields: {
-    hero_title: z.string(),
-    hero_subtitle: z.string(),
+    heroTitle: z.string(),
+    heroSubtitle: z.string().meta({ fieldType: 'textarea' }),
     features: z.array(z.object({
       title: z.string(),
       description: z.string(),
