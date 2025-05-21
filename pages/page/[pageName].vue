@@ -24,28 +24,47 @@ const state = reactive<Partial<Schema>>({})
 const mainFields = computed(() => {
   return page.value.fields
 })
+
+const sidebarFields = computed(() => {
+  return page.value.layout?.sidebar || []
+})
 </script>
 
 <!-- eslint-disable vue/no-multiple-template-root -->
 <template>
-  <h1 class="max-w-5xl mx-auto font-bold text-black mb-2">
-    {{ page.title || pageName }}
-  </h1>
-  <section class="max-w-5xl mx-auto">
+  <UContainer>
+    <h1 class="font-bold text-black mb-2">
+      {{ page.title || pageName }}
+    </h1>
     <UForm
       :state="state"
       :schema="schema"
       class="grid grid-cols-5 gap-8"
     >
       <section class="col-span-3">
-        <FieldFactory
+        <template
           v-for="(field, key) in mainFields"
           :key="key"
-          :field-key="key"
-          :field="field"
-        />
+        >
+          <FieldFactory
+            v-if="!sidebarFields.includes(key)"
+            :field-key="key"
+            :field="field"
+          />
+        </template>
       </section>
-      <section class="col-span-2" />
+      <section class="col-span-2">
+        <template
+          v-for="(field, key) in mainFields"
+          :key="key"
+        >
+          <FieldFactory
+            v-if="sidebarFields.includes(key)"
+            :field-key="key"
+            :field="field"
+          />
+        </template>
+      </section>
     </UForm>
-  </section>
+  </UContainer>
 </template>

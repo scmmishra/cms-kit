@@ -4,4 +4,5 @@
 :root {
   --ui-radius: 0.02em;
   --font-mono: "Geist Mono", monospace;
+  --ui-container: 64rem;
 }
