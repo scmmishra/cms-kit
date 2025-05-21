@@ -103,11 +103,9 @@ const homepage = definePage({
   fields: {
     heroTitle: z.string(),
     heroSubtitle: z.string().meta({ fieldType: 'textarea' }),
-    features: z.array(z.object({
-      title: z.string(),
-      description: z.string(),
-      icon: z.string().meta({ fieldType: 'code', language: 'svg' }),
-    })),
+    featuresTitle: z.string().min(10).max(40),
+    featuresBody: z.string().meta({ fieldType: 'markdown' }),
+    closing: z.string().meta({ fieldType: 'markdown' }),
     ...seoFields,
   },
   layout: {
@@ -122,11 +120,7 @@ const pricing = definePage({
   fields: {
     title: z.string(),
     description: z.string(),
-    features: z.array(z.object({
-      title: z.string(),
-      description: z.string(),
-      icon: z.string().meta({ fieldType: 'code', language: 'svg' }),
-    })),
+    howThisWorks: z.string().meta({ fieldType: 'markdown' }),
     ...seoFields,
   },
   layout: {

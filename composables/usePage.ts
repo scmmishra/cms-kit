@@ -20,22 +20,10 @@ export const usePage = () => {
 
   const state = reactive<Partial<Schema>>({})
 
-  const fieldsWithMeta = computed(() => {
-    if (!page.value) return []
-    return Object.entries(page.value.fields).map(([key, field]) => {
-      return {
-        key,
-        field,
-        meta: field.meta(),
-      }
-    })
-  })
-
   return {
     schema,
     pageName,
     state,
-    fieldsWithMeta,
     page,
   }
 }
