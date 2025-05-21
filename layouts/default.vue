@@ -15,7 +15,7 @@ const collectionItems = computed(() => {
     id: key,
     label: collection.title,
     description: collection.description,
-    to: `/collections/${key}`,
+    to: `/collection/${key}`,
   }))
 })
 
@@ -24,7 +24,7 @@ const pageItems = computed(() => {
     id: key,
     label: page.title,
     description: page.description,
-    to: key,
+    to: `/page/${key}`,
   }))
 })
 
