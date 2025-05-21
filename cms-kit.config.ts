@@ -8,7 +8,7 @@ export interface GlobalMeta {
   title?: string
   description?: string
   placeholder?: string
-  fieldtype?: 'markdown' | 'textarea' | 'image' | 'code'
+  fieldType?: 'markdown' | 'textarea' | 'image' | 'code'
   language?: string
   unqiue?: boolean
   relation?: string
@@ -47,11 +47,11 @@ const blogCollection = defineCollection({
     }),
     content: z.string().min(100).meta({
       description: 'The main content of the blog post',
-      fieldtype: 'markdown',
+      fieldType: 'markdown',
     }),
     excerpt: z.string().max(200).optional().meta({
       description: 'A short summary of the blog post',
-      fieldtype: 'textarea',
+      fieldType: 'textarea',
     }),
     publishedAt: z.iso.date().meta({
       title: 'Published Date',
@@ -59,7 +59,7 @@ const blogCollection = defineCollection({
     }),
     featuredImage: z.string().url().optional().meta({
       description: 'Main image for the blog post',
-      fieldtype: 'image',
+      fieldType: 'image',
     }),
     authors: z.array(z.string().meta({
       relation: 'author',
@@ -88,7 +88,7 @@ const pricingFaqsCollection = defineCollection({
     question: z.string(),
     answer: z.string().min(100).meta({
       description: 'The answer to the pricing FAQ',
-      fieldtype: 'markdown',
+      fieldType: 'markdown',
     }),
   },
   layout: {

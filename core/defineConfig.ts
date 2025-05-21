@@ -1,7 +1,7 @@
 import type { z } from 'zod/v4'
 
 // We need to infer the return type of defineCollection
-type CollectionDefinition<T extends z.ZodRawShape> = {
+export type CollectionDefinition<T extends z.ZodRawShape> = {
   title?: string
   description?: string
   fields: T
@@ -11,7 +11,7 @@ type CollectionDefinition<T extends z.ZodRawShape> = {
   }
 }
 
-type PageDefinition<T extends z.ZodRawShape = z.ZodRawShape> = {
+export type PageDefinition<T extends z.ZodRawShape = z.ZodRawShape> = {
   title?: string
   description?: string
   fields: T

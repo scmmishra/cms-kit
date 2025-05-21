@@ -1,42 +1,28 @@
 <script setup lang="ts">
-import type { z } from 'zod/v4'
-import { usePage, useTitleCase } from '~/composables'
+import { computed, reactive } from 'vue'
+import { z } from 'zod/v4'
+import { useCMSKitConfig } from '~/composables'
+import FieldFactory from '~/components/form/FieldFactory.vue'
 
-type FieldKeys<T extends z.ZodRawShape> = keyof T
+import type { PageKey } from '~/composables'
 
-const { pageName, page, state, schema } = usePage()
+const config = useCMSKitConfig()
+const route = useRoute()
+const pageName = computed(() => route.params.pageName as PageKey)
 
-const fieldsWithMeta = computed(() => {
-  if (!page.value) return []
-  return Object.entries(page.value.fields).map(([key, field]) => {
-    return {
-      key: key as FieldKeys<typeof page.value.fields>,
-      field,
-      meta: field.meta(),
-    }
-  })
+const page = computed(() => {
+  return config.pages[pageName.value]
 })
+
+const schema = computed(() => {
+  if (!page.value.fields) return z.object({})
+  return z.object(page.value.fields)
+})
+type Schema = z.output<typeof schema.value>
+const state = reactive<Partial<Schema>>({})
 
 const mainFields = computed(() => {
-  if (page.value.layout?.sidebar) {
-    const sidebarFields = page.value.layout?.sidebar ?? []
-    return fieldsWithMeta.value.filter((field) => {
-      return !sidebarFields.includes(field.key)
-    })
-  }
-
-  return fieldsWithMeta.value
-})
-
-const sidebarFields = computed(() => {
-  if (page.value.layout?.sidebar) {
-    const sidebarFields = page.value.layout?.sidebar ?? []
-    return fieldsWithMeta.value.filter((field) => {
-      return sidebarFields.includes(field.key)
-    })
-  }
-
-  return []
+  return page.value.fields
 })
 </script>
 
@@ -52,57 +38,14 @@ const sidebarFields = computed(() => {
       class="grid grid-cols-5 gap-8"
     >
       <section class="col-span-3">
-        <template
-          v-for="{ key, meta } in mainFields"
+        <FieldFactory
+          v-for="(field, key) in mainFields"
           :key="key"
-        >
-          <UFormField
-            class="mt-2 pb-2"
-            :label="meta?.title ?? useTitleCase(key)"
-            :name="key"
-            :help="meta?.description"
-          >
-            <UTextarea
-              v-if="['textarea', 'markdown', 'code'].includes(meta?.fieldType as string)"
-              v-model="state[key]"
-              autocomplete="off"
-              class="w-full"
-            />
-            <UInput
-              v-else
-              v-model="state[key]"
-              autocomplete="off"
-              class="w-full"
-            />
-          </UFormField>
-        </template>
+          :field-key="key"
+          :field="field"
+        />
       </section>
-      <section class="col-span-2">
-        <template
-          v-for="{ key, meta } in sidebarFields"
-          :key="key"
-        >
-          <UFormField
-            class="mt-2 pb-2"
-            :label="meta?.title ?? useTitleCase(key)"
-            :name="key"
-            :help="meta?.description"
-          >
-            <UTextarea
-              v-if="['textarea', 'markdown', 'code'].includes(meta?.fieldType as string)"
-              v-model="state[key]"
-              autocomplete="off"
-              class="w-full"
-            />
-            <UInput
-              v-else
-              v-model="state[key]"
-              autocomplete="off"
-              class="w-full"
-            />
-          </UFormField>
-        </template>
-      </section>
+      <section class="col-span-2" />
     </UForm>
   </section>
 </template>
