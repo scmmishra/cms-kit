@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { z } from 'zod/v4'
 import { useCollection } from '~/composables/useCollection'
 
 const { collectionName, collection } = useCollection()
@@ -15,8 +16,9 @@ const collectionSchema = computed(() => collection.value?.fields)
     <div
       v-for="(field, key) in collectionSchema"
       :key="key"
+      class="mt-2 border-b pb-2"
     >
-      <label>{{ field }}</label>
+      <label>{{ key }}{{ z.toJSONSchema(field) }}</label>
     </div>
   </section>
 </template>

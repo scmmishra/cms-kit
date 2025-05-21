@@ -53,7 +53,7 @@ const blogCollection = defineCollection({
       description: 'A short summary of the blog post',
       fieldtype: 'textarea',
     }),
-    publishedAt: z.date().meta({
+    publishedAt: z.iso.date().meta({
       title: 'Published Date',
       description: 'When the post was published',
     }),
