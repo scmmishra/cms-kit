@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@milkdown/kit": "^7.11.0",
+    "@milkdown/theme-nord": "^7.11.0",
     "@milkdown/vue": "^7.11.0",
     "@nuxt/eslint": "1.4.1",
     "@nuxt/icon": "1.13.0",
