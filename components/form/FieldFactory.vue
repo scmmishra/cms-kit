@@ -2,6 +2,7 @@
 import { z } from 'zod/v4'
 import { computed } from 'vue'
 import Image from './fields/Image.vue'
+import Markdown from './fields/Markdown.vue'
 import { USwitch, UTextarea, UInput } from '#components'
 import type { GlobalMeta } from '~/cms-kit.config'
 
@@ -14,7 +15,7 @@ const props = defineProps<{
 
 const FIELD_TYPE_MAP: Record<string, [Component, ComponentProps]> = {
   boolean: [USwitch],
-  markdown: [UTextarea, { autocomplete: 'off', class: 'w-full' }],
+  markdown: [Markdown, { autocomplete: 'off', class: 'w-full' }],
   textarea: [UTextarea, { autocomplete: 'off', class: 'w-full' }],
   code: [UTextarea, { autocomplete: 'off', class: 'w-full' }],
   string: [UInput, { autocomplete: 'off', class: 'w-full' }],
