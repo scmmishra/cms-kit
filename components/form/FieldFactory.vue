@@ -12,7 +12,6 @@ const props = defineProps<{
   fieldKey: string
 }>()
 
-const isDev = import.meta.dev
 const FIELD_TYPE_MAP: Record<string, [Component, ComponentProps]> = {
   boolean: [USwitch],
   markdown: [UTextarea, { autocomplete: 'off', class: 'w-full' }],
@@ -73,11 +72,8 @@ const componentToRender = computed(() => {
       :max-length="jsonSchema.maxLength"
       :placeholder="jsonSchema?.placeholder"
     />
-    <div
-      v-if="isDev"
-      class="mt-2 bg-white p-2 rounded-md outline outline-gray-200 overflow-hidden"
-    >
-      <pre>{{ jsonSchema }}</pre>
-    </div>
+    <DevBlock>
+      {{ jsonSchema }}
+    </DevBlock>
   </UFormField>
 </template>

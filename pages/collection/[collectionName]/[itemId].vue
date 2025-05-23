@@ -38,6 +38,9 @@ const sidebarFields = computed(() => {
     <h1 class="font-bold text-black mb-2">
       {{ collection.title || collectionName }} - {{ itemId }}
     </h1>
+    <DevBlock>
+      {{ state }}
+    </DevBlock>
     <UForm
       :state="state"
       :schema="schema"
