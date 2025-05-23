@@ -59,7 +59,7 @@ const componentToRender = computed(() => {
 <template>
   <UFormField
     class="mt-2 pb-2"
-    :label="fieldLabel"
+    :label="fieldType === 'boolean' ? '' : fieldLabel"
     :name="fieldKey"
     :required="!field.isOptional()"
     :help="jsonSchema?.description"
@@ -68,6 +68,7 @@ const componentToRender = computed(() => {
       :is="componentToRender[0]"
       v-bind="componentToRender[1]"
       v-model="modelValue"
+      :label="fieldLabel"
       :accept="jsonSchema?.accept"
       :min-length="jsonSchema.minLength"
       :max-length="jsonSchema.maxLength"
