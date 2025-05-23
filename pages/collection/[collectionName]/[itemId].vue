@@ -19,6 +19,7 @@ const schema = computed(() => {
   if (!collection.value.fields) return z.object({})
   return z.object(collection.value.fields)
 })
+
 type Schema = z.output<typeof schema.value>
 const state = reactive<Partial<Schema>>({})
 
@@ -49,6 +50,7 @@ const sidebarFields = computed(() => {
         >
           <FieldFactory
             v-if="!sidebarFields.includes(key)"
+            v-model="state[key]"
             :field-key="key"
             :field="field"
           />
@@ -61,6 +63,7 @@ const sidebarFields = computed(() => {
         >
           <FieldFactory
             v-if="sidebarFields.includes(key)"
+            v-model="state[key]"
             :field-key="key"
             :field="field"
           />
