@@ -61,6 +61,7 @@ const blogCollection = defineCollection({
     featuredImage: z.string().url().optional().meta({
       description: 'Main image for the blog post',
       fieldType: 'image',
+      mime: ['image/png', 'image/jpeg', 'image/webp'],
     }),
     authors: z.array(z.string().meta({
       relation: 'author',

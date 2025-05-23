@@ -31,7 +31,8 @@ export const seoFields = {
   ogImage: z.string().url('Must be a valid URL').optional().meta({
     title: 'Open Graph Image',
     description: 'Social media preview image. Recommended 1200x630px.',
-    fieldtype: 'image',
+    fieldType: 'image',
+    mime: ['image/png', 'image/jpeg', 'image/webp'],
   }),
   noIndex: z.boolean().default(false).meta({
     title: 'No Index',
