@@ -32,7 +32,7 @@ export const seoFields = {
     title: 'Open Graph Image',
     description: 'Social media preview image. Recommended 1200x630px.',
     fieldType: 'image',
-    mime: ['image/png', 'image/jpeg', 'image/webp'],
+    accept: ['image/png', 'image/jpeg', 'image/webp'],
   }),
   noIndex: z.boolean().default(false).meta({
     title: 'No Index',

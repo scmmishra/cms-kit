@@ -68,6 +68,7 @@ const componentToRender = computed(() => {
       :is="componentToRender[0]"
       v-bind="componentToRender[1]"
       v-model="modelValue"
+      :accept="jsonSchema?.accept"
       :min-length="jsonSchema.minLength"
       :max-length="jsonSchema.maxLength"
       :placeholder="jsonSchema?.placeholder"

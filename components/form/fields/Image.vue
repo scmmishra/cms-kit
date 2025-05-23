@@ -6,8 +6,11 @@ const modelValue = defineModel<string | null>()
 const selectedFile = ref<File | null>(null)
 const dropZoneRef = ref<HTMLDivElement | null>(null)
 
-// Image type limitations
-const imageTypes = 'image/jpeg,image/png,image/gif,image/webp,image/svg+xml'
+const props = withDefaults(defineProps<{
+  accept?: Array<string>
+}>(), {
+  accept: () => ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'],
+})
 
 // Use VueUse composables
 const previewUrl = useObjectUrl(selectedFile)
@@ -15,7 +18,7 @@ const { base64 } = useBase64(selectedFile)
 
 // File dialog setup
 const { files, open, reset } = useFileDialog({
-  accept: imageTypes,
+  accept: props.accept,
   multiple: false,
 })
 
@@ -48,7 +51,7 @@ const onDrop = (files: File[] | null) => {
 
 const { isOverDropZone } = useDropZone(dropZoneRef, {
   onDrop,
-  dataTypes: imageTypes.split(','),
+  dataTypes: props.accept,
   multiple: false,
 })
 
@@ -63,6 +66,13 @@ const clearImage = () => {
 }
 
 const imageSource = computed(() => previewUrl.value || modelValue.value)
+
+const acceptedFileTypes = computed(() => {
+  return props.accept.map((mimeType) => {
+    const extension = mimeType.split('/')[1].toUpperCase()
+    return extension === 'JPEG' ? 'JPG' : extension
+  }).join(', ')
+})
 </script>
 
 <template>
@@ -101,7 +111,7 @@ const imageSource = computed(() => previewUrl.value || modelValue.value)
         Click to upload or drag and drop
       </p>
       <p class="text-xs text-gray-500 mt-1">
-        Images only (JPEG, PNG, GIF, WebP, SVG)
+        Images only ({{ acceptedFileTypes }})
       </p>
     </div>
   </div>
