@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { MilkdownProvider } from '@milkdown/vue'
+
+const modelValue = defineModel<string>('modelValue')
 </script>
 
 <template>
   <MilkdownProvider class="prose dark:prose-invert prose-xs max-w-none w-full">
-    <MilkdownEditor />
+    <MilkdownEditor v-model="modelValue" />
   </MilkdownProvider>
 </template>
 
