@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { z } from 'zod/v4'
 import { computed } from 'vue'
+import Image from './fields/Image.vue'
 import { USwitch, UTextarea, UInput } from '#components'
 import type { GlobalMeta } from '~/cms-kit.config'
 
@@ -19,6 +20,7 @@ const FIELD_TYPE_MAP: Record<string, [Component, ComponentProps]> = {
   code: [UTextarea, { autocomplete: 'off', class: 'w-full' }],
   string: [UInput, { autocomplete: 'off', class: 'w-full' }],
   date: [UInput, { type: 'date', autocomplete: 'off', class: 'w-full' }],
+  image: [Image],
 }
 
 type FieldType = z.infer<typeof props.field>
