@@ -10,6 +10,20 @@ useHead({
   },
 })
 
+async function logout() {
+  try {
+    await $fetch('/api/auth/logout', {
+      method: 'POST',
+    })
+
+    // Redirect to login page after successful logout
+    await navigateTo('/login')
+  }
+  catch (error) {
+    console.error('Logout failed:', error)
+  }
+}
+
 const collectionItems = computed(() => {
   return Object.entries(collections).map(([key, collection]) => ({
     id: key,
@@ -59,6 +73,7 @@ const items = ref<NavigationMenuItem[][]>([
     {
       label: 'Log out',
       icon: 'i-lucide-log-out',
+      onSelect: logout,
     },
   ],
 ])
