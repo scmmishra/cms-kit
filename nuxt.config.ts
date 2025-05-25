@@ -10,8 +10,10 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-05-15',
   nitro: {
-    prerender: {
-      autoSubfolderIndex: false,
+    preset: 'cloudflare_module',
+    cloudflare: {
+      deployConfig: true,
+      nodeCompat: true,
     },
   },
   vite: {
