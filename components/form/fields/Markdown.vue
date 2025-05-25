@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { MilkdownProvider } from '@milkdown/vue'
+import MilkdownEditor from '../../MilkdownEditor.vue'
 
 const modelValue = defineModel<string>('modelValue')
 </script>

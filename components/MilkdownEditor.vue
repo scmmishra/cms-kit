@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Milkdown, useEditor } from '@milkdown/vue'
 import { defaultValueCtx, Editor, rootCtx } from '@milkdown/kit/core'
-// import { listener, listenerCtx } from '@milkdown/plugin-listener'
+import { listener, listenerCtx } from '@milkdown/plugin-listener'
 import { nord } from '@milkdown/theme-nord'
 import { commonmark } from '@milkdown/kit/preset/commonmark'
 
@@ -15,15 +15,15 @@ useEditor((root) => {
     .config((ctx) => {
       ctx.set(rootCtx, root)
       ctx.set(defaultValueCtx, modelValue.value)
-      // const listener = ctx.get(listenerCtx)
+      const listener = ctx.get(listenerCtx)
 
-      // listener.markdownUpdated((ctx, markdown, prevMarkdown) => {
-      //   if (markdown !== prevMarkdown) {
-      //     modelValue.value = markdown
-      //   }
-      // })
+      listener.markdownUpdated((ctx, markdown, prevMarkdown) => {
+        if (markdown !== prevMarkdown) {
+          console.log(markdown)
+        }
+      })
     })
-    // .use(listener)
+    .use(listener)
     .use(commonmark)
 })
 </script>
