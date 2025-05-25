@@ -10,10 +10,6 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@milkdown/kit": "^7.11.1",
-    "@milkdown/plugin-listener": "^7.11.1",
-    "@milkdown/theme-nord": "^7.11.1",
-    "@milkdown/vue": "^7.11.1",
     "@nuxt/eslint": "1.4.1",
     "@nuxt/icon": "1.13.0",
     "@nuxt/ui": "3.1.2",
