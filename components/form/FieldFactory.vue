@@ -14,7 +14,7 @@ const props = defineProps<{
   fieldKey: string
 }>()
 
-type FieldConfig = [Component, Record<string, unknown>]
+type FieldConfig = [Component | typeof USwitch | typeof UTextarea | typeof UInput, Record<string, unknown>]
 
 const FIELD_TYPE_MAP: Record<string, FieldConfig> = {
   boolean: [USwitch, {}],
@@ -56,7 +56,7 @@ const componentToRender = computed(() => {
     return FIELD_TYPE_MAP[fieldType.value]
   }
 
-  return ''
+  return [null, {}]
 })
 </script>
 
@@ -65,7 +65,7 @@ const componentToRender = computed(() => {
     class="mt-2 pb-2"
     :label="fieldType === 'boolean' ? '' : fieldLabel"
     :name="fieldKey"
-    :required="!field.isOptional()"
+    :required="!field.safeParse(undefined).success"
     :help="jsonSchema?.description"
   >
     <component
