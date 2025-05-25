@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { z } from 'zod/v4'
 import { computed } from 'vue'
+import type { Component } from 'vue'
 import Image from './fields/Image.vue'
 import Markdown from './fields/Markdown.vue'
 import { USwitch, UTextarea, UInput } from '#components'
@@ -13,14 +14,16 @@ const props = defineProps<{
   fieldKey: string
 }>()
 
-const FIELD_TYPE_MAP: Record<string, [Component, Record<string, string | number | boolean> | null]> = {
-  boolean: [USwitch],
+type FieldConfig = [Component, Record<string, unknown>]
+
+const FIELD_TYPE_MAP: Record<string, FieldConfig> = {
+  boolean: [USwitch, {}],
   markdown: [Markdown, { autocomplete: 'off', class: 'w-full' }],
   textarea: [UTextarea, { autocomplete: 'off', class: 'w-full' }],
   code: [UTextarea, { autocomplete: 'off', class: 'w-full' }],
   string: [UInput, { autocomplete: 'off', class: 'w-full' }],
   date: [UInput, { type: 'date', autocomplete: 'off', class: 'w-full' }],
-  image: [Image],
+  image: [Image, {}],
 }
 
 type FieldType = z.infer<typeof props.field>
