@@ -9,6 +9,11 @@ export default defineNuxtConfig({
     colorMode: false,
   },
   compatibilityDate: '2025-05-15',
+  nitro: {
+    prerender: {
+      autoSubfolderIndex: false,
+    },
+  },
   vite: {
     plugins: [
       tailwindcss(),
