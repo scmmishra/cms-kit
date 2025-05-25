@@ -35,7 +35,7 @@ watch(modelValue, () => nextTick(autoResize), { immediate: true })
     />
     <div
       v-show="showPreview"
-      class="px-2.5 py-1.5 prose prose-sm prose-h1:mt-2 prose-h2:mt-2"
+      class="px-2.5 py-1.5 prose prose-sm prose-h1:mt-2 prose-h2:mt-2 max-w-none"
       :style="{ minHeight: textareaRef?.style.height }"
     >
       <div v-html="$sanitizeHTML(renderedMarkdown)" />
