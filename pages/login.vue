@@ -12,7 +12,6 @@ useHead({
 })
 
 const state = reactive({
-  email: '',
   password: '',
 })
 </script>
@@ -27,16 +26,6 @@ const state = reactive({
         :state
         class="mt-5 space-y-4"
       >
-        <UFormField
-          label="Email"
-          name="email"
-        >
-          <UInput
-            v-model="state.email"
-            class="w-full"
-          />
-        </UFormField>
-
         <UFormField
           label="Password"
           name="password"
