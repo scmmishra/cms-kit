@@ -38,7 +38,7 @@ watch(modelValue, () => nextTick(autoResize), { immediate: true })
       class="px-2.5 py-1.5 prose prose-sm prose-h1:mt-2 prose-h2:mt-2 max-w-none"
       :style="{ minHeight: textareaRef?.style.height }"
     >
-      <div v-html="$sanitizeHTML(renderedMarkdown)" />
+      <div v-html="renderedMarkdown" />
     </div>
     <div class="border-t flex items-center justify-between border-gray-300 w-full py-1 px-2 font-mono text-xs text-gray-500">
       <div class="flex items-center gap-1">
