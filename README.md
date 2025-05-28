@@ -4,6 +4,8 @@
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 
+![screenshot](.github/cms-kit.webp)
+
 ## Key Features
 
 *   **Simplified Schema Definition:** Define your content structures using a zod based schema builder
